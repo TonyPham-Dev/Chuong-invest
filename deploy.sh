@@ -78,12 +78,12 @@ fi
 mkdir -p "${APP_DIR}"
 tar -xzf "/tmp/${ARCHIVE_NAME}" -C "${APP_DIR}"
 cd "${APP_DIR}"
-${SUDO} docker build -t "${APP_NAME}:latest" .
-if ${SUDO} docker ps -a --format '{{.Names}}' | grep -q "^${APP_NAME}\$"; then
-  ${SUDO} docker stop "${APP_NAME}" || true
-  ${SUDO} docker rm "${APP_NAME}" || true
+\${SUDO} docker build -t "${APP_NAME}:latest" .
+if \${SUDO} docker ps -a --format '{{.Names}}' | grep -q "^${APP_NAME}\$"; then
+  \${SUDO} docker stop "${APP_NAME}" || true
+  \${SUDO} docker rm "${APP_NAME}" || true
 fi
-${SUDO} docker run -d \
+\${SUDO} docker run -d \
   --name "${APP_NAME}" \
   --restart unless-stopped \
   -p "${HOST_PORT}:${CONTAINER_PORT}" \
@@ -99,7 +99,7 @@ else
   SUDO="sudo"
 fi
 if command -v nginx >/dev/null 2>&1; then
-  ${SUDO} tee /etc/nginx/sites-available/${DOMAIN} >/dev/null <<NGINXCONF
+  \${SUDO} tee /etc/nginx/sites-available/${DOMAIN} >/dev/null <<NGINXCONF
 server {
   listen 80;
   server_name ${DOMAIN} www.${DOMAIN};
@@ -117,9 +117,9 @@ server {
   }
 }
 NGINXCONF
-  ${SUDO} ln -sf /etc/nginx/sites-available/${DOMAIN} /etc/nginx/sites-enabled/${DOMAIN}
-  ${SUDO} nginx -t
-  ${SUDO} systemctl reload nginx
+  \${SUDO} ln -sf /etc/nginx/sites-available/${DOMAIN} /etc/nginx/sites-enabled/${DOMAIN}
+  \${SUDO} nginx -t
+  \${SUDO} systemctl reload nginx
 else
   echo "Nginx not found. Please install Nginx and configure reverse proxy manually."
 fi
