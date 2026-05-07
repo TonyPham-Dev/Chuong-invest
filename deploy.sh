@@ -12,11 +12,11 @@ SSH_TARGET="${SSH_USER}@${SERVER_IP}"
 ARCHIVE_NAME="investex-release.tar.gz"
 ENABLE_SSL="${2:-false}"
 
-if command -v npm >/dev/null 2>&1; then
+if command -v npm >/dev/null 2>&1 && [ -x "./node_modules/.bin/next" ]; then
   echo "==> Building production bundle locally"
   npm run build
 else
-  echo "==> npm not found on local machine, skipping local build"
+  echo "==> Local npm/next dependencies not ready, skipping local build"
   echo "==> Docker build on server will validate source and build production image"
 fi
 
