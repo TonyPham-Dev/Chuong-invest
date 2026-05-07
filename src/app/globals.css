@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-display), ui-serif, Georgia, serif;
+  --color-warm-wood: #c4a574;
+  --color-warm-wood-dark: #8b7355;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-stone-50 text-stone-800 antialiased;
+}
