@@ -22,6 +22,7 @@ fi
 
 echo "==> Creating source archive"
 tar \
+  --warning=no-file-changed \
   --exclude="./node_modules" \
   --exclude="./.next" \
   --exclude="./.git" \
